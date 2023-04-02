@@ -127,6 +127,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DatabaseSingleton.cs" />
+    <Compile Include="View\MainView.Master.cs">
+      <DependentUpon>MainView.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\MainView.Master.designer.cs">
+      <DependentUpon>MainView.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\KpopzstationModel.edmx">
@@ -137,6 +144,7 @@
       <DependentUpon>KpopzstationModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
+    <Content Include="View\MainView.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -148,7 +156,6 @@
     <Folder Include="Controller\" />
     <Folder Include="Factory\" />
     <Folder Include="Handler\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
