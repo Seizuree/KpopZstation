@@ -115,6 +115,8 @@
       <LastGenOutput>KpopzstationModel.cs</LastGenOutput>
     </Content>
     <Content Include="View\ArtistDetail.aspx" />
+    <Content Include="View\InsertAlbum.aspx" />
+    <Content Include="View\UpdateAlbum.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -163,12 +165,26 @@
     <Compile Include="View\ArtistDetail.aspx.designer.cs">
       <DependentUpon>ArtistDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\InsertAlbum.aspx.cs">
+      <DependentUpon>InsertAlbum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\InsertAlbum.aspx.designer.cs">
+      <DependentUpon>InsertAlbum.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.Master.cs">
       <DependentUpon>MainView.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\MainView.Master.designer.cs">
       <DependentUpon>MainView.Master</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateAlbum.aspx.cs">
+      <DependentUpon>UpdateAlbum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\UpdateAlbum.aspx.designer.cs">
+      <DependentUpon>UpdateAlbum.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
