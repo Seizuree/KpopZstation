@@ -32,15 +32,21 @@ namespace KpopZstation.View
             Response.Redirect("UpdateAlbum.aspx");
         }
 
-        protected void btnDeleteAlbum_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void gvAlbumsDetail_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
             GridViewRow row = gvAlbumsDetail.Rows[e.NewSelectedIndex];
-            tbSelectedAlbumName.Text = row.Cells[2].Text;
+            tbAlbumID.Text = row.Cells[1].Text;
+            tbAlbumName.Text = row.Cells[3].Text;
+            tbAlbumPrice.Text = row.Cells[4].Text;
+            tbAlbumDescription.Text = row.Cells[5].Text;
+        }
+
+        protected void gvAlbumsDetail_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            GridViewRow row = gvAlbumsDetail.Rows[e.RowIndex];
+            AlbumRepository deleteAlbum = new AlbumRepository();
+            deleteAlbum.DeleteAlbum(row.Cells[1].Text);
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

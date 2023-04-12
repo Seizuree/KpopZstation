@@ -42,22 +42,76 @@ namespace KpopZstation.View
         protected global::System.Web.UI.WebControls.GridView gvAlbumsDetail;
 
         /// <summary>
-        /// lblSelectedAlbumName control.
+        /// lblAlbumID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSelectedAlbumName;
+        protected global::System.Web.UI.WebControls.Label lblAlbumID;
 
         /// <summary>
-        /// tbSelectedAlbumName control.
+        /// tbAlbumID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSelectedAlbumName;
+        protected global::System.Web.UI.WebControls.TextBox tbAlbumID;
+
+        /// <summary>
+        /// lblAlbumName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAlbumName;
+
+        /// <summary>
+        /// tbAlbumName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAlbumName;
+
+        /// <summary>
+        /// lblAlbumPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAlbumPrice;
+
+        /// <summary>
+        /// tbAlbumPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAlbumPrice;
+
+        /// <summary>
+        /// lblAlbumDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAlbumDescription;
+
+        /// <summary>
+        /// tbAlbumDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAlbumDescription;
 
         /// <summary>
         /// btnInsertAlbum control.
@@ -76,14 +130,5 @@ namespace KpopZstation.View
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpdateAlbum;
-
-        /// <summary>
-        /// btnDeleteAlbum control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteAlbum;
     }
 }
