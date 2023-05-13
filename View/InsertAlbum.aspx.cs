@@ -13,5 +13,29 @@ namespace KpopZstation.View
         {
 
         }
+
+        protected void btnSubmitAlbum_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void FileSizeValidation(object source, ServerValidateEventArgs args)
+        {
+            if (upImage.HasFile)
+            {
+                if (upImage.PostedFile.ContentLength <= 2 * 1024 * 1024)
+                {
+                    args.IsValid = true;
+                }
+                else
+                {
+                    args.IsValid = false; 
+                }
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }
     }
 }
