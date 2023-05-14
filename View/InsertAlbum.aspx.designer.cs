@@ -33,24 +33,6 @@ namespace KpopZstation.View
         protected global::System.Web.UI.WebControls.TextBox tbAlbName;
 
         /// <summary>
-        /// lblAlbNameRequiredValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator lblAlbNameRequiredValidation;
-
-        /// <summary>
-        /// lblAlbNameCharacterValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator lblAlbNameCharacterValidation;
-
-        /// <summary>
         /// lblAlbDesc control.
         /// </summary>
         /// <remarks>
@@ -67,24 +49,6 @@ namespace KpopZstation.View
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbAlbDesc;
-
-        /// <summary>
-        /// lblAlbDescRequiredValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator lblAlbDescRequiredValidation;
-
-        /// <summary>
-        /// lblAlbDescCharacterValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator lblAlbDescCharacterValidation;
 
         /// <summary>
         /// lblAlbPrice control.
@@ -105,24 +69,6 @@ namespace KpopZstation.View
         protected global::System.Web.UI.WebControls.TextBox tbAlbPrice;
 
         /// <summary>
-        /// lblAlbPriceRequiredValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator lblAlbPriceRequiredValidation;
-
-        /// <summary>
-        /// lblAlbPriceRangeValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator lblAlbPriceRangeValidation;
-
-        /// <summary>
         /// lblAlbStock control.
         /// </summary>
         /// <remarks>
@@ -139,24 +85,6 @@ namespace KpopZstation.View
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbAlbStock;
-
-        /// <summary>
-        /// lblAlbStockRequiredValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator lblAlbStockRequiredValidation;
-
-        /// <summary>
-        /// lblAlbStockRangeValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator lblAlbStockRangeValidation;
 
         /// <summary>
         /// lblImage control.
@@ -177,22 +105,13 @@ namespace KpopZstation.View
         protected global::System.Web.UI.WebControls.FileUpload upImage;
 
         /// <summary>
-        /// upImageExtensionValidation control.
+        /// lblError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator upImageExtensionValidation;
-
-        /// <summary>
-        /// upImageSizeValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator upImageSizeValidation;
+        protected global::System.Web.UI.WebControls.Label lblError;
 
         /// <summary>
         /// btnSubmitAlbum control.

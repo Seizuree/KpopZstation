@@ -1,5 +1,5 @@
-﻿using KpopZstation.Model;
-using KpopZstation.Repository;
+﻿using KpopZstation.Controller;
+using KpopZstation.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +11,13 @@ namespace KpopZstation.View
 {
     public partial class ArtistDetail : System.Web.UI.Page
     {
+        AlbumController albController = new AlbumController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                AlbumRepository albumView = new AlbumRepository();
-                List<Album> albums = albumView.GetAlbums();
+                int id = Convert.ToInt32(Request.QueryString["art_id"]);
+                List<Album> albums = albController.GetAllAlbums(id);
                 gvAlbumsDetail.DataSource = albums;
                 gvAlbumsDetail.DataBind();
             }
@@ -24,7 +25,8 @@ namespace KpopZstation.View
 
         protected void btnInsertAlbum_Click(object sender, EventArgs e)
         {
-            Response.Redirect("InsertAlbum.aspx");
+            // id belum jadi.
+            Response.Redirect("InsertAlbum.aspx?art_id=1");
         }
 
         protected void btnUpdateAlbum_Click(object sender, EventArgs e)
@@ -44,8 +46,7 @@ namespace KpopZstation.View
         protected void gvAlbumsDetail_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             GridViewRow row = gvAlbumsDetail.Rows[e.RowIndex];
-            AlbumRepository deleteAlbum = new AlbumRepository();
-            deleteAlbum.DeleteAlbum(row.Cells[1].Text);
+            albController.DeleteAlbum(row.Cells[1].Text);
             Response.Redirect(Request.RawUrl);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KpopZstation.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,26 +16,14 @@ namespace KpopZstation.View
         }
 
         protected void btnSubmitAlbum_Click(object sender, EventArgs e)
-        {
-            
-        }
+        {            
+            AlbumController validator = new AlbumController();
+            int id = Convert.ToInt32(Request.QueryString["art_id"]);
+            lblError.Text = validator.AlbumValidation(id, tbAlbName.Text, tbAlbDesc.Text, tbAlbPrice.Text, tbAlbStock.Text, upImage.PostedFile.FileName, upImage.PostedFile.ContentLength);
 
-        protected void FileSizeValidation(object source, ServerValidateEventArgs args)
-        {
-            if (upImage.HasFile)
+            if (lblError.Text == "Success")
             {
-                if (upImage.PostedFile.ContentLength <= 2 * 1024 * 1024)
-                {
-                    args.IsValid = true;
-                }
-                else
-                {
-                    args.IsValid = false; 
-                }
-            }
-            else
-            {
-                args.IsValid = false;
+                Response.Redirect("ArtistDetail.aspx?art_id" + id);
             }
         }
     }
