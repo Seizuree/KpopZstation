@@ -7,27 +7,22 @@
     <div>
         <asp:Label ID="lblAlbName" runat="server" Text="Album Name"></asp:Label>
         <asp:TextBox ID="tbAlbName" runat="server"></asp:TextBox>
-        <br />
     </div>
     <div>
         <asp:Label ID="lblAlbDesc" runat="server" Text="Album Description"></asp:Label>
         <asp:TextBox ID="tbAlbDesc" runat="server"></asp:TextBox>
-        <br />
     </div>
     <div>
         <asp:Label ID="lblAlbPrice" runat="server" Text="Album Price"></asp:Label>
         <asp:TextBox ID="tbAlbPrice" runat="server"></asp:TextBox>
-        <br />
     </div>
     <div>
         <asp:Label ID="lblAlbStock" runat="server" Text="Album Stock"></asp:Label>
         <asp:TextBox ID="tbAlbStock" runat="server"></asp:TextBox>
-        <br />
     </div>
     <div>
         <asp:Label ID="lblImage" runat="server" Text="Album Image"></asp:Label>
         <asp:FileUpload ID="upImage" runat="server" />
-        <br />
     </div>
     <div>
         <asp:Label ID="lblError" runat="server" Text=""></asp:Label> 

@@ -11,7 +11,7 @@ namespace KpopZstation.Controller
     public class AlbumController
     {
         AlbumHandler handler = new AlbumHandler();
-        public string AlbumValidation(int ArtistID,string AlbName, string AlbDesc, string AlbPrice, string AlbStock, string UploadedFileName, int UploadedFileSize)
+        public string AlbumValidation(string AlbName, string AlbDesc, int AlbPrice, int AlbStock, string UploadedFileName, int UploadedFileSize)
         {
             if(AlbName.Equals(""))
             {
@@ -35,10 +35,8 @@ namespace KpopZstation.Controller
             {
                 return "Please fill the Album Price!";
             }
-
-            int price = Convert.ToInt32(AlbPrice);
             
-            if (price < 100000 || price > 1000000)
+            if (AlbPrice < 100000 || AlbPrice > 1000000)
             {
                 return "Album price must be between 100000 and 1000000";
             }
@@ -48,9 +46,7 @@ namespace KpopZstation.Controller
                 return "Please fill the Album Stock!";
             }
             
-            int stock = Convert.ToInt32(AlbStock);
-            
-            if (stock < 0)
+            if (AlbStock < 0)
             {
                 return "Album stock must be more than 0";
             }
@@ -85,15 +81,35 @@ namespace KpopZstation.Controller
                     return "Image file extension must be .png, .jpg, .jpeg, or .jfif";
                 }
             }
-            
-            handler.uploadAlbum(ArtistID, AlbName, AlbDesc, price, stock, UploadedFileName);
 
             return "Success";
         }
 
-        public List<Album> GetAllAlbums(int id)
+        public string InsertAlbum(int ArtistID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, string UploadedFileName, int UploadedFileSize)
         {
-            return handler.GetAlbumsByID(id);
+            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName, UploadedFileSize);
+            
+            handler.uploadAlbum(ArtistID, AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName);
+            
+            return result;
+        }
+
+        public string UpdateAlbum(int AlbumID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, string UploadedFileName, int UploadedFileSize)
+        {
+            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName, UploadedFileSize);
+
+            handler.updateAlbum(AlbumID, AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName);
+            return result;
+        }
+
+        public List<Album> GetAllAlbumsByArtistID(int id)
+        {
+            return handler.GetAlbumsByArtistID(id);
+        }
+
+        public Album GetAlbumByAlbumID(int id)
+        {
+            return handler.GetAlbumByAlbumID(id);
         }
 
         public Album DeleteAlbum(String id)

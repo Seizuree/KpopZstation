@@ -17,7 +17,7 @@ namespace KpopZstation.View
             if (!IsPostBack)
             {
                 int id = Convert.ToInt32(Request.QueryString["art_id"]);
-                List<Album> albums = albController.GetAllAlbums(id);
+                List<Album> albums = albController.GetAllAlbumsByArtistID(id);
                 gvAlbumsDetail.DataSource = albums;
                 gvAlbumsDetail.DataBind();
             }
@@ -25,13 +25,14 @@ namespace KpopZstation.View
 
         protected void btnInsertAlbum_Click(object sender, EventArgs e)
         {
-            // id belum jadi.
-            Response.Redirect("InsertAlbum.aspx?art_id=1");
+            int id = Convert.ToInt32(Request.QueryString["art_id"]);
+            Response.Redirect("InsertAlbum.aspx?art_id=" + id);
         }
 
         protected void btnUpdateAlbum_Click(object sender, EventArgs e)
         {
-            Response.Redirect("UpdateAlbum.aspx");
+            int id = Convert.ToInt32(Request.QueryString["art_id"]);
+            Response.Redirect("UpdateAlbum.aspx?art_id=" + id + "&alb_id=" + tbAlbumID.Text);
         }
 
         protected void gvAlbumsDetail_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)

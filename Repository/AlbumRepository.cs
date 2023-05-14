@@ -11,9 +11,14 @@ namespace KpopZstation.Repository
     {
         KpopzstationDatabaseEntities db = DatabaseSingleton.getInstance();
 
-        public List<Album> GetByID(int id)
+        public List<Album> GetAlbumsByArtistID(int id)
         {
             return (from al in db.Albums where al.ArtistID == id select al).ToList();
+        }
+
+        public Album GetAlbumByID(int id)
+        {
+            return (from al in db.Albums where al.AlbumID == id select al).FirstOrDefault();
         }
 
         public Album InsertAlbum(int artistID, String albumName, String albumImage, int albumPrice, int albumStock, String albumDescription)
@@ -24,9 +29,9 @@ namespace KpopZstation.Repository
             return insert;
         }
 
-        public Album UpdateAlbum(String albumID, String albumName, String albumImage, int albumPrice, int albumStock, String albumDescription)
+        public Album UpdateAlbum(int albumID, String albumName, String albumImage, int albumPrice, int albumStock, String albumDescription)
         {
-            Album update = db.Albums.Find(int.Parse(albumID));
+            Album update = db.Albums.Find(albumID);
             update.Albumname = albumName;
             update.AlbumImage = albumImage;
             update.AlbumPrice = albumPrice;
