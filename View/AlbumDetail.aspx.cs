@@ -16,6 +16,7 @@ namespace KpopZstation.View
         {
             if (!IsPostBack)
             {
+                // manual artistID and albumID
                 int ArtistID = Convert.ToInt32(Request.QueryString["art_id"]);
                 ArtistID = 1;
                 int AlbumID = Convert.ToInt32(Request.QueryString["alb_id"]);
