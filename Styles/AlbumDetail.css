@@ -1,0 +1,25 @@
+﻿body {
+}
+
+.albname{
+    font-size: 20px;
+}
+
+.albdetail{
+    font-size: 18px;
+}
+
+.albumview{
+    margin: 10px 0 15px 0;
+}
+
+.quantity{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}
+
+.quantitybox{
+    width: 20px;
+    text-align: center;
+}

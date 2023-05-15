@@ -79,6 +79,31 @@
     <Content Include="App_Data\KpopzstationDatabase_log.ldf">
       <DependentUpon>KpopzstationDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="Assets\Albums\638058597622333864.jfif" />
+    <Content Include="Assets\Albums\638058600253472624.jpg" />
+    <Content Include="Assets\Albums\638058602735846856.jpg" />
+    <Content Include="Assets\Albums\638058716701119579.jpg" />
+    <Content Include="Assets\Albums\638058717003784490.jpg" />
+    <Content Include="Assets\Albums\638059437442094314.jfif" />
+    <Content Include="Assets\Albums\638059438205501702.jpg" />
+    <Content Include="Assets\Albums\638059439116596296.jpg" />
+    <Content Include="Assets\Albums\638059439942434092.jfif" />
+    <Content Include="Assets\Albums\638059442482614063.jfif" />
+    <Content Include="Assets\Albums\638059446920356665.jfif" />
+    <Content Include="Assets\Albums\638059447624756394.jfif" />
+    <Content Include="Assets\Albums\638059449025055368.jpg" />
+    <Content Include="Assets\Albums\638059449905363164.jpg" />
+    <Content Include="Assets\Albums\638059451370799986.jfif" />
+    <Content Include="Assets\Artists\638057862770194070.jpeg" />
+    <Content Include="Assets\Artists\638057899497035774.jfif" />
+    <Content Include="Assets\Artists\638057900448119533.jfif" />
+    <Content Include="Assets\Artists\638058485179546128.jfif" />
+    <Content Include="Assets\Artists\638058486287141139.jfif" />
+    <Content Include="Assets\Artists\638058489004609070.jfif" />
+    <Content Include="Assets\Artists\638058554486609538.jfif" />
+    <Content Include="Assets\Artists\638059446432559006.jfif" />
+    <Content Include="Assets\Artists\638059447901481658.jfif" />
+    <Content Include="Assets\Artists\638059450808002463.jfif" />
     <Content Include="Model\KpopzstationModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>KpopzstationModel.Context.cs</LastGenOutput>
@@ -89,9 +114,20 @@
       <DependentUpon>KpopzstationModel.edmx</DependentUpon>
       <LastGenOutput>KpopzstationModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Styles\AlbumDetail.css" />
+    <Content Include="View\AlbumDetail.aspx" />
+    <Content Include="View\ArtistDetail.aspx" />
+    <Content Include="View\InsertAlbum.aspx" />
+    <Content Include="View\UpdateAlbum.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\AlbumController.cs" />
+    <Compile Include="Controller\ArtistController.cs" />
+    <Compile Include="Factory\AlbumFactory.cs" />
+    <Compile Include="Factory\ArtistFactory.cs" />
+    <Compile Include="Handler\AlbumHandler.cs" />
+    <Compile Include="Handler\ArtistHandler.cs" />
     <Compile Include="Model\Album.cs">
       <DependentUpon>KpopzstationModel.tt</DependentUpon>
     </Compile>
@@ -126,13 +162,42 @@
       <DependentUpon>KpopzstationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AlbumRepository.cs" />
     <Compile Include="Repository\DatabaseSingleton.cs" />
+    <Compile Include="View\AlbumDetail.aspx.cs">
+      <DependentUpon>AlbumDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AlbumDetail.aspx.designer.cs">
+      <DependentUpon>AlbumDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\ArtistDetail.aspx.cs">
+      <DependentUpon>ArtistDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\ArtistDetail.aspx.designer.cs">
+      <DependentUpon>ArtistDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\InsertAlbum.aspx.cs">
+      <DependentUpon>InsertAlbum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\InsertAlbum.aspx.designer.cs">
+      <DependentUpon>InsertAlbum.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.Master.cs">
       <DependentUpon>MainView.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\MainView.Master.designer.cs">
       <DependentUpon>MainView.Master</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateAlbum.aspx.cs">
+      <DependentUpon>UpdateAlbum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\UpdateAlbum.aspx.designer.cs">
+      <DependentUpon>UpdateAlbum.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -152,11 +217,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-    <Folder Include="Factory\" />
-    <Folder Include="Handler\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
