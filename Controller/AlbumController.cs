@@ -112,9 +112,49 @@ namespace KpopZstation.Controller
             return handler.GetAlbumByAlbumID(id);
         }
 
+        public Album GetAlbumByArtistIDAndAlbumID(int artistID, int albumID)
+        {
+            return handler.GetAlbumByArtistIDAndAlbumID(artistID, albumID);
+        }
+
         public Album DeleteAlbum(String id)
         {
             return handler.deleteAlbum(id);
+        }
+
+        public string AddQuantity(string curr)
+        {
+            int add = Convert.ToInt32(curr) + 1;
+            return Convert.ToString(add);
+        }
+
+        public string RemoveQuantity(string curr)
+        {
+            int remove = Convert.ToInt32(curr) - 1;
+            return Convert.ToString(remove);
+        }
+
+        public Boolean AddButtonValidation(string curr, string stock)
+        {
+            int add = Convert.ToInt32(curr);
+            int CurrStock = Convert.ToInt32(stock);
+
+            if (add >= CurrStock)
+            {
+                return false;
+            }
+
+            else return true;
+        }
+
+        public Boolean RemoveButtonValidation(string curr)
+        {
+            int remove = Convert.ToInt32(curr);
+            if (remove <= 1)
+            {
+                return false;
+            }
+            else return true;
         }
     }
 }

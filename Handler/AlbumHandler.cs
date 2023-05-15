@@ -34,5 +34,10 @@ namespace KpopZstation.Handler
         {
             return AlbumRepo.GetAlbumByID(id);
         }
+
+        public Album GetAlbumByArtistIDAndAlbumID(int artistID, int albumID)
+        {
+            return AlbumRepo.GetAlbumByArtistIDAndAlbumID(artistID, albumID);
+        }
     }
 }

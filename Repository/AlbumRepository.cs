@@ -21,6 +21,11 @@ namespace KpopZstation.Repository
             return (from al in db.Albums where al.AlbumID == id select al).FirstOrDefault();
         }
 
+        public Album GetAlbumByArtistIDAndAlbumID(int artistID, int albumID)
+        {
+            return (from al in db.Albums where al.AlbumID == albumID && al.ArtistID == artistID select al).FirstOrDefault();
+        }
+
         public Album InsertAlbum(int artistID, String albumName, String albumImage, int albumPrice, int albumStock, String albumDescription)
         {
             Album insert = AlbumFactory.addAlbum(artistID, albumName, albumImage, albumPrice, albumStock, albumDescription);

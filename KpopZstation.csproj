@@ -114,6 +114,8 @@
       <DependentUpon>KpopzstationModel.edmx</DependentUpon>
       <LastGenOutput>KpopzstationModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Styles\AlbumDetail.css" />
+    <Content Include="View\AlbumDetail.aspx" />
     <Content Include="View\ArtistDetail.aspx" />
     <Content Include="View\InsertAlbum.aspx" />
     <Content Include="View\UpdateAlbum.aspx" />
@@ -162,6 +164,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AlbumRepository.cs" />
     <Compile Include="Repository\DatabaseSingleton.cs" />
+    <Compile Include="View\AlbumDetail.aspx.cs">
+      <DependentUpon>AlbumDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\AlbumDetail.aspx.designer.cs">
+      <DependentUpon>AlbumDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\ArtistDetail.aspx.cs">
       <DependentUpon>ArtistDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
