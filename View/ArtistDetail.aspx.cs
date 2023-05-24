@@ -12,12 +12,18 @@ namespace KpopZstation.View
     public partial class ArtistDetail : System.Web.UI.Page
     {
         AlbumController albController = new AlbumController();
+        ArtistController artController = new ArtistController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 int id = Convert.ToInt32(Request.QueryString["art_id"]);
+                // manual artist id
+                id = 1;
+                Artist CurrArt = artController.GetArtistByArtistID(id);
                 List<Album> albums = albController.GetAllAlbumsByArtistID(id);
+                lblArtName.Text = "Artist Name : " + CurrArt.ArtistName;
+                imgArt.ImageUrl = CurrArt.ArtistImage;
                 gvAlbumsDetail.DataSource = albums;
                 gvAlbumsDetail.DataBind();
             }
@@ -39,9 +45,9 @@ namespace KpopZstation.View
         {
             GridViewRow row = gvAlbumsDetail.Rows[e.NewSelectedIndex];
             tbAlbumID.Text = row.Cells[1].Text;
-            tbAlbumName.Text = row.Cells[3].Text;
-            tbAlbumPrice.Text = row.Cells[4].Text;
-            tbAlbumDescription.Text = row.Cells[5].Text;
+            tbAlbumName.Text = row.Cells[2].Text;
+            tbAlbumPrice.Text = row.Cells[3].Text;
+            tbAlbumDescription.Text = row.Cells[4].Text;
         }
 
         protected void gvAlbumsDetail_RowDeleting(object sender, GridViewDeleteEventArgs e)

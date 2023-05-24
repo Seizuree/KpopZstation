@@ -11,7 +11,7 @@ namespace KpopZstation.Controller
     public class AlbumController
     {
         AlbumHandler handler = new AlbumHandler();
-        public string AlbumValidation(string AlbName, string AlbDesc, int AlbPrice, int AlbStock, string UploadedFileName, int UploadedFileSize)
+        public string AlbumValidation(string AlbName, string AlbDesc, int AlbPrice, int AlbStock, FileUpload upImage)
         {
             if(AlbName.Equals(""))
             {
@@ -51,12 +51,12 @@ namespace KpopZstation.Controller
                 return "Album stock must be more than 0";
             }
             
-            if (UploadedFileName.Equals(""))
+            if (upImage.PostedFile.FileName.Equals(""))
             {
                 return "Please choose Album Image!";
             }
             
-            else if (UploadedFileSize >= 2000000)
+            else if (upImage.PostedFile.ContentLength >= 2000000)
             {
                 return "Image file size must be lower than 2MB";
             }
@@ -65,7 +65,7 @@ namespace KpopZstation.Controller
             {
                 String[] validTypes = { ".png", ".jpg", ".jpeg", ".jfif" };
                 bool isValidFile = false;
-                String ext = System.IO.Path.GetExtension(UploadedFileName);
+                String ext = System.IO.Path.GetExtension(upImage.PostedFile.FileName);
 
                 for (var i = 0; i < validTypes.Length; i++)
                 {
@@ -85,20 +85,27 @@ namespace KpopZstation.Controller
             return "Success";
         }
 
-        public string InsertAlbum(int ArtistID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, string UploadedFileName, int UploadedFileSize)
+        public string InsertAlbum(int ArtistID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, FileUpload images)
         {
-            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName, UploadedFileSize);
+            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, images);
             
-            handler.uploadAlbum(ArtistID, AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName);
+            if(result == "Success")
+            {
+                handler.uploadAlbum(ArtistID, AlbName, AlbDesc, AlbPrice, AlbStock, images);
+            }
             
             return result;
         }
 
-        public string UpdateAlbum(int AlbumID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, string UploadedFileName, int UploadedFileSize)
+        public string UpdateAlbum(int AlbumID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, FileUpload images)
         {
-            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName, UploadedFileSize);
+            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, images);
 
-            handler.updateAlbum(AlbumID, AlbName, AlbDesc, AlbPrice, AlbStock, UploadedFileName);
+            if (result == "Success")
+            {
+                handler.updateAlbum(AlbumID, AlbName, AlbDesc, AlbPrice, AlbStock, images);
+            }
+            
             return result;
         }
 

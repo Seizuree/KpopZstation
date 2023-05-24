@@ -10,6 +10,9 @@
             <asp:Label ID="AlbName" runat="server" Font-Bold="True" CssClass="albname"></asp:Label>
         </div>
         <div class="albumview">
+            <asp:Image ID="AlbImage" runat="server" Height="200px" Width="200px" />
+        </div>
+        <div class="albumview">
             <asp:Label ID="lblAlbDesc" runat="server" Text="Description"></asp:Label>
             <asp:Label ID="AlbDesc" runat="server" CssClass="albdetail"></asp:Label>
         </div>

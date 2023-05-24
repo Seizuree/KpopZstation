@@ -29,7 +29,7 @@ namespace KpopZstation.View
         {
             int ArtistID = Convert.ToInt32(Request.QueryString["art_id"]);
             int AlbumID = Convert.ToInt32(Request.QueryString["alb_id"]);
-            lblError.Text = controller.UpdateAlbum(AlbumID, tbAlbName.Text, tbAlbDesc.Text, Convert.ToInt32(tbAlbPrice.Text), Convert.ToInt32(tbAlbStock.Text), upImage.PostedFile.FileName, upImage.PostedFile.ContentLength);
+            lblError.Text = controller.UpdateAlbum(AlbumID, tbAlbName.Text, tbAlbDesc.Text, Convert.ToInt32(tbAlbPrice.Text), Convert.ToInt32(tbAlbStock.Text), upImage);
 
             if (lblError.Text == "Success")
             {
