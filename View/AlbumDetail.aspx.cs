@@ -18,11 +18,12 @@ namespace KpopZstation.View
             {
                 // manual artistID and albumID
                 int ArtistID = Convert.ToInt32(Request.QueryString["art_id"]);
-                ArtistID = 1;
                 int AlbumID = Convert.ToInt32(Request.QueryString["alb_id"]);
+                ArtistID = 1;
                 AlbumID = 1;
                 Album CurrAlbum = controller.GetAlbumByArtistIDAndAlbumID(ArtistID, AlbumID);
                 AlbName.Text = CurrAlbum.Albumname;
+                AlbImage.ImageUrl = CurrAlbum.AlbumImage;
                 AlbDesc.Text = CurrAlbum.AlbumDescription;
                 AlbPrice.Text = Convert.ToString(CurrAlbum.AlbumPrice);
                 AlbStock.Text = Convert.ToString(CurrAlbum.AlbumStock);
