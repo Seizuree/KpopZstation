@@ -35,26 +35,18 @@ namespace KpopZstation.View
             Response.Redirect("InsertAlbum.aspx?art_id=" + id);
         }
 
-        protected void btnUpdateAlbum_Click(object sender, EventArgs e)
-        {
-            int id = Convert.ToInt32(Request.QueryString["art_id"]);
-            Response.Redirect("UpdateAlbum.aspx?art_id=" + id + "&alb_id=" + tbAlbumID.Text);
-        }
-
-        protected void gvAlbumsDetail_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
-        {
-            GridViewRow row = gvAlbumsDetail.Rows[e.NewSelectedIndex];
-            tbAlbumID.Text = row.Cells[1].Text;
-            tbAlbumName.Text = row.Cells[2].Text;
-            tbAlbumPrice.Text = row.Cells[3].Text;
-            tbAlbumDescription.Text = row.Cells[4].Text;
-        }
-
         protected void gvAlbumsDetail_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             GridViewRow row = gvAlbumsDetail.Rows[e.RowIndex];
-            albController.DeleteAlbum(row.Cells[1].Text);
+            albController.DeleteAlbum(row.Cells[0].Text);
             Response.Redirect(Request.RawUrl);
+        }
+
+        protected void gvAlbumsDetail_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridViewRow row = gvAlbumsDetail.Rows[e.NewEditIndex];
+            int id = Convert.ToInt32(Request.QueryString["art_id"]);
+            Response.Redirect("UpdateAlbum.aspx?art_id=" + id + "&alb_id=" + row.Cells[0].Text);
         }
     }
 }
