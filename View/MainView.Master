@@ -5,13 +5,42 @@
 <html>
 <head runat="server">
     <title></title>
+    <style>
+    .navbar {
+      background-color: #f2f2f2;
+      padding: 10px;
+    }
+
+    .navbar button {
+      margin-right: 10px;
+    }
+  </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
+           <div class="navbar">
+               <% if (customer == null) {%>
+                   <asp:Button ID="btHome" runat="server" Text="Home" OnClick="btHome_Click" />
+                   <asp:Button ID="btLogin" runat="server" Text="Login" OnClick="btLogin_Click" />
+                   <asp:Button ID="btRegister" runat="server" Text="Register" OnClick="btRegister_Click" />
+               <%} else if (customer.CustomerRole.Equals("admin")) { %>
+                   <asp:Button ID="btHomeC" runat="server" Text="Home" OnClick="btHome_Click"/>
+                   <asp:Button ID="btCartC" runat="server" Text="Cart" OnClick="btCartC_Click"  /> 
+                   <asp:Button ID="btTransactionC" runat="server" Text="Transaction" OnClick="btTransactionC_Click" />
+                   <asp:Button ID="btUpdateC" runat="server" Text="Update Profile" OnClick="btUpdateC_Click" />
+                   <asp:Button ID="btLogoutC" runat="server" Text="LogOut" OnClick="btLogoutC_Click" />
+               <%} else { %>
+                   <asp:Button ID="btHomeA" runat="server" Text="Home" OnClick="btHome_Click"/>
+                   <asp:Button ID="btTransactionA" runat="server" Text="Transaction" OnClick="btTransactionC_Click"/>
+                   <asp:Button ID="btUpdateA" runat="server" Text="Update Profile" OnClick="btUpdateC_Click"/>
+                   <asp:Button ID="btLogoutA" runat="server" Text="LogOut" OnClick="btLogoutC_Click"/>
+               <%} %>
+          </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
             </asp:ContentPlaceHolder>
         </div>
     </form>
