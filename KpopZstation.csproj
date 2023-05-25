@@ -111,8 +111,11 @@
     <Content Include="Styles\AlbumDetail.css" />
     <Content Include="View\AlbumDetail.aspx" />
     <Content Include="View\ArtistDetail.aspx" />
+    <Content Include="View\CreateArtist.aspx" />
+    <Content Include="View\Home.aspx" />
     <Content Include="View\InsertAlbum.aspx" />
     <Content Include="View\UpdateAlbum.aspx" />
+    <Content Include="View\UpdateArtist.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +176,20 @@
     <Compile Include="View\ArtistDetail.aspx.designer.cs">
       <DependentUpon>ArtistDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\CreateArtist.aspx.cs">
+      <DependentUpon>CreateArtist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\CreateArtist.aspx.designer.cs">
+      <DependentUpon>CreateArtist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\InsertAlbum.aspx.cs">
       <DependentUpon>InsertAlbum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,6 +210,13 @@
     </Compile>
     <Compile Include="View\UpdateAlbum.aspx.designer.cs">
       <DependentUpon>UpdateAlbum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateArtist.aspx.cs">
+      <DependentUpon>UpdateArtist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\UpdateArtist.aspx.designer.cs">
+      <DependentUpon>UpdateArtist.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

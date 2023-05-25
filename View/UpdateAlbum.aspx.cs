@@ -17,6 +17,7 @@ namespace KpopZstation.View
             if (!IsPostBack)
             {
                 int id = Convert.ToInt32(Request.QueryString["alb_id"]);
+                id = 1;
                 Album CurrAlbum = controller.GetAlbumByAlbumID(id);
                 tbAlbName.Text = CurrAlbum.Albumname;
                 tbAlbDesc.Text = CurrAlbum.AlbumDescription;
