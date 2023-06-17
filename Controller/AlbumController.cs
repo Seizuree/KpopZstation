@@ -1,5 +1,6 @@
 ﻿using KpopZstation.Handler;
 using KpopZstation.Model;
+using KpopZstation.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,54 +12,77 @@ namespace KpopZstation.Controller
     public class AlbumController
     {
         AlbumHandler handler = new AlbumHandler();
-        public string AlbumValidation(string AlbName, string AlbDesc, int AlbPrice, int AlbStock, FileUpload upImage)
+
+        public Album InsertAlbum(InsertAlbum view, int ArtistID, string AlbName, string AlbDesc, string AlbPrice, string AlbStock, FileUpload upImage)
         {
-            if(AlbName.Equals(""))
+            if (AlbName.Equals(""))
             {
-                return "Please fill the Album Name!";
+                view.ErrorMessage = "Please fill the Album Name!";
+                return null;
             }
-            else if(AlbName.Length > 50)
+            else if (AlbName.Length > 50)
             {
-                return "Album name must be under 50 characters!";
+                view.ErrorMessage = "Album name must be under 50 characters!";
+                return null;
             }
 
             else if (AlbDesc.Equals(""))
             {
-                return "Please fill the Album Description!";
+                view.ErrorMessage = "Please fill the Album Description!";
+                return null;
             }
             else if (AlbDesc.Length > 255)
             {
-                return "Album description must be under 255 characters!";
+                view.ErrorMessage = "Album description must be under 255 characters!";
+                return null;
             }
 
             else if (AlbPrice.Equals(""))
             {
-                return "Please fill the Album Price!";
+                view.ErrorMessage = "Please fill the Album Price!";
+                return null;
             }
-            
-            if (AlbPrice < 100000 || AlbPrice > 1000000)
+
+            var isNumeric = int.TryParse(AlbPrice, out int price);
+            if(!isNumeric)
             {
-                return "Album price must be between 100000 and 1000000";
+                view.ErrorMessage = "Album price must be numeric";
+                return null;
             }
-            
+            if (price < 100000 || price > 1000000)
+            {
+                view.ErrorMessage = "Album price must be between 100000 and 1000000";
+                return null;
+            }
+
             if (AlbStock.Equals(""))
             {
-                return "Please fill the Album Stock!";
+                view.ErrorMessage = "Please fill the Album Stock!";
+                return null;
             }
-            
-            if (AlbStock < 0)
+
+            var isStockNumeric = int.TryParse(AlbStock, out int stock);
+            if (!isStockNumeric)
             {
-                return "Album stock must be more than 0";
+                view.ErrorMessage = "Album stock must be numeric";
+                return null;
             }
-            
+            if (stock <= 0)
+            {
+                view.ErrorMessage = "Album stock must be more than 0";
+                return null;
+            }
+
             if (upImage.PostedFile.FileName.Equals(""))
             {
-                return "Please choose Album Image!";
+                view.ErrorMessage = "Please choose Album Image!";
+                return null;
             }
-            
+
             else if (upImage.PostedFile.ContentLength >= 2000000)
             {
-                return "Image file size must be lower than 2MB";
+                view.ErrorMessage = "Image file size must be lower than 2MB";
+                return null;
             }
 
             else
@@ -78,36 +102,111 @@ namespace KpopZstation.Controller
 
                 if (!isValidFile)
                 {
-                    return "Image file extension must be .png, .jpg, .jpeg, or .jfif";
+                    view.ErrorMessage = "Image file extension must be .png, .jpg, .jpeg, or .jfif";
+                    return null;
                 }
             }
 
-            return "Success";
+            return handler.uploadAlbum(ArtistID, AlbName, AlbDesc, price, stock, upImage);
         }
 
-        public string InsertAlbum(int ArtistID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, FileUpload images)
+        public Album UpdateAlbum(UpdateAlbum view, int AlbumID, string AlbName, string AlbDesc, string AlbPrice, string AlbStock, FileUpload upImage)
         {
-            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, images);
-            
-            if(result == "Success")
+            if (AlbName.Equals(""))
             {
-                handler.uploadAlbum(ArtistID, AlbName, AlbDesc, AlbPrice, AlbStock, images);
+                view.ErrorMessage = "Please fill the Album Name!";
+                return null;
             }
-            
-            return result;
+            else if (AlbName.Length > 50)
+            {
+                view.ErrorMessage = "Album name must be under 50 characters!";
+                return null;
+            }
+
+            else if (AlbDesc.Equals(""))
+            {
+                view.ErrorMessage = "Please fill the Album Description!";
+                return null;
+            }
+            else if (AlbDesc.Length > 255)
+            {
+                view.ErrorMessage = "Album description must be under 255 characters!";
+                return null;
+            }
+
+            else if (AlbPrice.Equals(""))
+            {
+                view.ErrorMessage = "Please fill the Album Price!";
+                return null;
+            }
+
+            var isNumeric = int.TryParse(AlbPrice, out int price);
+            if (!isNumeric)
+            {
+                view.ErrorMessage = "Album price must be numeric";
+                return null;
+            }
+            if (price < 100000 || price > 1000000)
+            {
+                view.ErrorMessage = "Album price must be between 100000 and 1000000";
+                return null;
+            }
+
+            if (AlbStock.Equals(""))
+            {
+                view.ErrorMessage = "Please fill the Album Stock!";
+                return null;
+            }
+
+            var isStockNumeric = int.TryParse(AlbStock, out int stock);
+            if (!isStockNumeric)
+            {
+                view.ErrorMessage = "Album stock must be numeric";
+                return null;
+            }
+            if (stock <= 0)
+            {
+                view.ErrorMessage = "Album stock must be more than 0";
+                return null;
+            }
+
+            if (upImage.PostedFile.FileName.Equals(""))
+            {
+                view.ErrorMessage = "Please choose Album Image!";
+                return null;
+            }
+
+            else if (upImage.PostedFile.ContentLength >= 2000000)
+            {
+                view.ErrorMessage = "Image file size must be lower than 2MB";
+                return null;
+            }
+
+            else
+            {
+                String[] validTypes = { ".png", ".jpg", ".jpeg", ".jfif" };
+                bool isValidFile = false;
+                String ext = System.IO.Path.GetExtension(upImage.PostedFile.FileName);
+
+                for (var i = 0; i < validTypes.Length; i++)
+                {
+                    if (ext == validTypes[i])
+                    {
+                        isValidFile = true;
+                        break;
+                    }
+                }
+
+                if (!isValidFile)
+                {
+                    view.ErrorMessage = "Image file extension must be .png, .jpg, .jpeg, or .jfif";
+                    return null;
+                }
+            }
+
+            return handler.updateAlbum(AlbumID, AlbName, AlbDesc, price, stock, upImage);
         }
 
-        public string UpdateAlbum(int AlbumID, string AlbName, string AlbDesc, int AlbPrice, int AlbStock, FileUpload images)
-        {
-            string result = AlbumValidation(AlbName, AlbDesc, AlbPrice, AlbStock, images);
-
-            if (result == "Success")
-            {
-                handler.updateAlbum(AlbumID, AlbName, AlbDesc, AlbPrice, AlbStock, images);
-            }
-            
-            return result;
-        }
 
         public List<Album> GetAllAlbumsByArtistID(int id)
         {
@@ -119,12 +218,7 @@ namespace KpopZstation.Controller
             return handler.GetAlbumByAlbumID(id);
         }
 
-        public Album GetAlbumByArtistIDAndAlbumID(int artistID, int albumID)
-        {
-            return handler.GetAlbumByArtistIDAndAlbumID(artistID, albumID);
-        }
-
-        public Album DeleteAlbum(String id)
+        public Album DeleteAlbum(int id)
         {
             return handler.deleteAlbum(id);
         }

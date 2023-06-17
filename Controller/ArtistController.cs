@@ -1,5 +1,6 @@
 ﻿using KpopZstation.Handler;
 using KpopZstation.Model;
+using KpopZstation.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +14,39 @@ namespace KpopZstation.Controller
         ArtistHandler handler = new ArtistHandler();
         public string ArtistValidation(string ArtName, FileUpload upImage)
         {
+
+
+            return "Success";
+        }
+
+        public bool InsertArtist(InsertArtist view, string ArtName, FileUpload upImage)
+        {
             if (ArtName.Equals(""))
             {
-                return "Please fill the Artist Name!";
+                view.ErrorMessage = "Please fill the Artist Name!";
+                return false;
             }
             else if (ArtName.Length > 50)
             {
-                return "Artist name must be under 50 characters!";
+                view.ErrorMessage = "Artist name must be under 50 characters!";
+                return false;
+            }
+            else if (!handler.isArtistNameUnique(ArtName))
+            {
+                view.ErrorMessage = "Artist name must be unique!";
+                return false;
             }
 
             if (upImage.PostedFile.FileName.Equals(""))
             {
-                return "Please choose Artist Image!";
+                view.ErrorMessage = "Please choose Artist Image!";
+                return false;
             }
 
             else if (upImage.PostedFile.ContentLength >= 2000000)
             {
-                return "Image file size must be lower than 2MB";
+                view.ErrorMessage = "Image file size must be lower than 2MB";
+                return false;
             }
 
             else
@@ -49,35 +66,67 @@ namespace KpopZstation.Controller
 
                 if (!isValidFile)
                 {
-                    return "Image file extension must be .png, .jpg, .jpeg, or .jfif";
+                    view.ErrorMessage = "Image file extension must be .png, .jpg, .jpeg, or .jfif";
+                    return false;
                 }
             }
 
-            return "Success";
+            return handler.uploadArtist(ArtName, upImage);
         }
 
-        public string InsertArtist(string ArtName, FileUpload images)
+        public bool UpdateArtist(UpdateArtist view, int ArtistID, string ArtName, FileUpload upImage)
         {
-            string result = ArtistValidation(ArtName, images);
-
-            if (result == "Success")
+            if (ArtName.Equals(""))
             {
-                handler.uploadArtist(ArtName, images);
+                view.ErrorMessage = "Please fill the Artist Name!";
+                return false;
+            }
+            else if (ArtName.Length > 50)
+            {
+                view.ErrorMessage = "Artist name must be under 50 characters!";
+                return false;
+            }
+            else if (!handler.isArtistNameUnique(ArtName))
+            {
+                view.ErrorMessage = "Artist name must be unique!";
+                return false;
             }
 
-            return result;
-        }
-
-        public string UpdateArtist(int ArtistID, string ArtName, FileUpload images)
-        {
-            string result = ArtistValidation(ArtName, images);
-
-            if (result == "Success")
+            if (upImage.PostedFile.FileName.Equals(""))
             {
-                handler.updateArtist(ArtistID, ArtName, images);
+                view.ErrorMessage = "Please choose Artist Image!";
+                return false;
             }
 
-            return result;
+            else if (upImage.PostedFile.ContentLength >= 2000000)
+            {
+                view.ErrorMessage = "Image file size must be lower than 2MB";
+                return false;
+            }
+
+            else
+            {
+                String[] validTypes = { ".png", ".jpg", ".jpeg", ".jfif" };
+                bool isValidFile = false;
+                String ext = System.IO.Path.GetExtension(upImage.PostedFile.FileName);
+
+                for (var i = 0; i < validTypes.Length; i++)
+                {
+                    if (ext == validTypes[i])
+                    {
+                        isValidFile = true;
+                        break;
+                    }
+                }
+
+                if (!isValidFile)
+                {
+                    view.ErrorMessage = "Image file extension must be .png, .jpg, .jpeg, or .jfif";
+                    return false;
+                }
+            }
+
+            return handler.updateArtist(ArtistID, ArtName, upImage);
         }
 
         public List<Artist> GetAllArtistsByArtistID(int id)
@@ -95,7 +144,7 @@ namespace KpopZstation.Controller
             return handler.GetArtistByArtistID(id);
         }
 
-        public Artist DeleteArtist(String id)
+        public Artist DeleteArtist(int id)
         {
             return handler.deleteArtist(id);
         }

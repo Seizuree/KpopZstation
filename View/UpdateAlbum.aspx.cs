@@ -11,13 +11,33 @@ namespace KpopZstation.View
 {
     public partial class UpdateAlbum : System.Web.UI.Page
     {
+        public Customer customer;
         AlbumController controller = new AlbumController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            customer = ((Customer)Session["customer"]);
+
+            if (customer == null)
+            {
+                Response.Redirect("~/View/Login.aspx");
+            }
+            if (!customer.CustomerRole.Equals("admin"))
+            {
+                Response.Redirect("~/View/Home.aspx");
+            }
+            if (Request.QueryString["alb_id"] == null)
+            {
+                Response.Redirect("~/View/Home.aspx");
+            }
+
             if (!IsPostBack)
             {
+                if (Request.QueryString["alb_id"] == null)
+                {
+                    Response.Redirect("~/View/Home.aspx");
+                }
                 int id = Convert.ToInt32(Request.QueryString["alb_id"]);
-                id = 1;
+
                 Album CurrAlbum = controller.GetAlbumByAlbumID(id);
                 tbAlbName.Text = CurrAlbum.Albumname;
                 tbAlbDesc.Text = CurrAlbum.AlbumDescription;
@@ -26,15 +46,33 @@ namespace KpopZstation.View
             }
         }
 
+        public string ErrorMessage
+        {
+            get { return lblError.Text; }
+            set
+            {
+                lblError.Text = value;
+
+                // Show Error Alert
+                if (!string.IsNullOrEmpty(lblError.Text))
+                {
+                    alert.Style.Remove("display");
+                }
+                else
+                {
+                    alert.Style.Add("display", "none");
+                }
+            }
+        }
+
         protected void btnUpdateAlbum_Click(object sender, EventArgs e)
         {
-            int ArtistID = Convert.ToInt32(Request.QueryString["art_id"]);
             int AlbumID = Convert.ToInt32(Request.QueryString["alb_id"]);
-            lblError.Text = controller.UpdateAlbum(AlbumID, tbAlbName.Text, tbAlbDesc.Text, Convert.ToInt32(tbAlbPrice.Text), Convert.ToInt32(tbAlbStock.Text), upImage);
+            Album album = controller.UpdateAlbum(this, AlbumID, tbAlbName.Text, tbAlbDesc.Text, tbAlbPrice.Text, tbAlbStock.Text, upImage);
 
-            if (lblError.Text == "Success")
+            if (album != null)
             {
-                Response.Redirect("ArtistDetail.aspx?art_id=" + ArtistID);
+                Response.Redirect("ArtistDetail.aspx?art_id=" + album.ArtistID);
             }
         }
     }

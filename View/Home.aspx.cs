@@ -11,34 +11,45 @@ namespace KpopZstation.View
 {
     public partial class Home : System.Web.UI.Page
     {
-        AlbumController albController = new AlbumController();
+        public List<Artist> Artists;
+        public Customer customer;
+
         ArtistController artController = new ArtistController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            customer = ((Customer)Session["customer"]);
+
             if (!IsPostBack)
             {
-                List<Artist> Artists = artController.GetAllArtists();
-                gvArtistsDetail.DataSource = Artists;
-                gvArtistsDetail.DataBind();
+                Artists = artController.GetAllArtists();
+                rptArtists.DataSource = Artists;
+                rptArtists.DataBind();
             }
-        }
-
-        protected void gvArtistsDetail_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            GridViewRow row = gvArtistsDetail.Rows[e.RowIndex];
-            artController.DeleteArtist(row.Cells[0].Text);
-            Response.Redirect(Request.RawUrl);
-        }
-
-        protected void gvArtistsDetail_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            GridViewRow row = gvArtistsDetail.Rows[e.NewEditIndex];
-            Response.Redirect("~/View/UpdateArtist.aspx?art_id=" + row.Cells[0].Text);
         }
 
         protected void btnInsertArtist_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/View/CreateArtist.aspx");
+            Response.Redirect("~/View/InsertArtist.aspx");
+        }
+
+        protected void rptArtists_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument);
+            if (e.CommandName == "detail")
+            {
+                Response.Redirect("~/View/ArtistDetail.aspx?art_id=" + id);
+            }
+
+            if (e.CommandName == "update")
+            {
+                Response.Redirect("~/View/UpdateArtist.aspx?art_id=" + id);
+            }
+
+            if (e.CommandName == "delete")
+            {
+                artController.DeleteArtist(id);
+                Response.Redirect(Request.RawUrl);
+            }
         }
     }
 }

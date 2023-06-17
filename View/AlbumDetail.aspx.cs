@@ -11,22 +11,50 @@ namespace KpopZstation.View
 {
     public partial class AlbumDetail : System.Web.UI.Page
     {
+        public Customer customer;
         AlbumController controller = new AlbumController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            customer = ((Customer)Session["customer"]);
+            if (customer == null)
+            {
+                Response.Redirect("~/View/Login.aspx");
+            }
+
             if (!IsPostBack)
             {
                 // manual artistID and albumID
-                int ArtistID = Convert.ToInt32(Request.QueryString["art_id"]);
+                if (Request.QueryString["alb_id"] == null)
+                {
+                    Response.Redirect("~/View/Home.aspx");
+                }
                 int AlbumID = Convert.ToInt32(Request.QueryString["alb_id"]);
-                ArtistID = 1;
-                AlbumID = 1;
-                Album CurrAlbum = controller.GetAlbumByArtistIDAndAlbumID(ArtistID, AlbumID);
+
+                Album CurrAlbum = controller.GetAlbumByAlbumID(AlbumID);
                 AlbName.Text = CurrAlbum.Albumname;
-                AlbImage.ImageUrl = CurrAlbum.AlbumImage;
+                AlbImage.ImageUrl = ResolveUrl("~/Assets/Albums/" + CurrAlbum.AlbumImage);
                 AlbDesc.Text = CurrAlbum.AlbumDescription;
                 AlbPrice.Text = Convert.ToString(CurrAlbum.AlbumPrice);
                 AlbStock.Text = Convert.ToString(CurrAlbum.AlbumStock);
+            }
+        }
+
+        public string ErrorMessage
+        {
+            get { return lblError.Text; }
+            set
+            {
+                lblError.Text = value;
+
+                // Show Error Alert
+                if (!string.IsNullOrEmpty(lblError.Text))
+                {
+                    alert.Style.Remove("display");
+                }
+                else
+                {
+                    alert.Style.Add("display", "none");
+                }
             }
         }
 
@@ -46,7 +74,10 @@ namespace KpopZstation.View
 
         protected void btnAddToCart_Click(object sender, EventArgs e)
         {
-
+            if(CartController.validateAlbum(this, customer.CustomerID, Request.QueryString["alb_id"], tbQuantity.Text))
+            {
+                Response.Redirect("~/View/MyCart.aspx");
+            }
         }
     }
 }

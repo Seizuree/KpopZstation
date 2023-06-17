@@ -11,42 +11,62 @@ namespace KpopZstation.View
 {
     public partial class ArtistDetail : System.Web.UI.Page
     {
+        public Customer customer;
+        public Artist CurrArt;
+
         AlbumController albController = new AlbumController();
         ArtistController artController = new ArtistController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            customer = ((Customer)Session["customer"]);
+            if (customer == null)
+            {
+                Response.Redirect("~/View/Login.aspx");
+            }
+
             if (!IsPostBack)
             {
+                if(Request.QueryString["art_id"] == null)
+                {
+                    Response.Redirect("~/View/Home.aspx");
+                }
                 int id = Convert.ToInt32(Request.QueryString["art_id"]);
+
                 // manual artist id
-                id = 1;
-                Artist CurrArt = artController.GetArtistByArtistID(id);
+                CurrArt = artController.GetArtistByArtistID(id);
+                imgArtist.ImageUrl = ResolveUrl("~/Assets/Artists/" + CurrArt.ArtistImage);
+
                 List<Album> albums = albController.GetAllAlbumsByArtistID(id);
-                lblArtName.Text = "Artist Name : " + CurrArt.ArtistName;
-                imgArt.ImageUrl = CurrArt.ArtistImage;
-                gvAlbumsDetail.DataSource = albums;
-                gvAlbumsDetail.DataBind();
+
+                rptAlbum.DataSource = albums;
+                rptAlbum.DataBind();
+            }
+        }
+
+        protected void rptAlbum_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument);
+            if (e.CommandName == "detail")
+            {
+                Response.Redirect("~/View/AlbumDetail.aspx?alb_id=" + id);
+            }
+
+            if (e.CommandName == "update")
+            {
+                Response.Redirect("~/View/UpdateAlbum.aspx?alb_id=" + id);
+            }
+
+            if (e.CommandName == "delete")
+            {
+                albController.DeleteAlbum(id);
+                Response.Redirect(Request.RawUrl);
             }
         }
 
         protected void btnInsertAlbum_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(Request.QueryString["art_id"]);
-            Response.Redirect("InsertAlbum.aspx?art_id=" + id);
-        }
-
-        protected void gvAlbumsDetail_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            GridViewRow row = gvAlbumsDetail.Rows[e.RowIndex];
-            albController.DeleteAlbum(row.Cells[0].Text);
-            Response.Redirect(Request.RawUrl);
-        }
-
-        protected void gvAlbumsDetail_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            GridViewRow row = gvAlbumsDetail.Rows[e.NewEditIndex];
-            int id = Convert.ToInt32(Request.QueryString["art_id"]);
-            Response.Redirect("UpdateAlbum.aspx?art_id=" + id + "&alb_id=" + row.Cells[0].Text);
+            Response.Redirect("~/View/InsertAlbum.aspx?art_id=" + id);
         }
     }
 }

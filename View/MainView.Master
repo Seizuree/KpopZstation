@@ -5,44 +5,82 @@
 <html>
 <head runat="server">
     <title></title>
-    <style>
-    .navbar {
-      background-color: #f2f2f2;
-      padding: 10px;
-    }
 
-    .navbar button {
-      margin-right: 10px;
-    }
-  </style>
+    <!-- Hope Ui Design System Css (Bootstrap Template -> styling tidak masuk komponen penilaian) -->
+    <link rel="stylesheet" href="../assets/css/hope-ui.min.css?v=1.0.3" />
+
+    <style>
+    </style>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-           <div class="navbar">
-               <% if (customer == null) {%>
-                   <asp:Button ID="btHome" runat="server" Text="Home" OnClick="btHome_Click" />
-                   <asp:Button ID="btLogin" runat="server" Text="Login" OnClick="btLogin_Click" />
-                   <asp:Button ID="btRegister" runat="server" Text="Register" OnClick="btRegister_Click" />
-               <%} else if (customer.CustomerRole.Equals("admin")) { %>
-                   <asp:Button ID="btHomeC" runat="server" Text="Home" OnClick="btHome_Click"/>
-                   <asp:Button ID="btCartC" runat="server" Text="Cart" OnClick="btCartC_Click"  /> 
-                   <asp:Button ID="btTransactionC" runat="server" Text="Transaction" OnClick="btTransactionC_Click" />
-                   <asp:Button ID="btUpdateC" runat="server" Text="Update Profile" OnClick="btUpdateC_Click" />
-                   <asp:Button ID="btLogoutC" runat="server" Text="LogOut" OnClick="btLogoutC_Click" />
-               <%} else { %>
-                   <asp:Button ID="btHomeA" runat="server" Text="Home" OnClick="btHome_Click"/>
-                   <asp:Button ID="btTransactionA" runat="server" Text="Transaction" OnClick="btTransactionC_Click"/>
-                   <asp:Button ID="btUpdateA" runat="server" Text="Update Profile" OnClick="btUpdateC_Click"/>
-                   <asp:Button ID="btLogoutA" runat="server" Text="LogOut" OnClick="btLogoutC_Click"/>
-               <%} %>
-          </div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-
-            </asp:ContentPlaceHolder>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">KpopZstation</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnHome" class="nav-link" runat="server" OnClick="btHome_Click">Home</asp:LinkButton>
+                            </li>
+                            <% if (customer == null)
+                                {%>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnLogin" class="nav-link" runat="server" OnClick="btLogin_Click">Login</asp:LinkButton>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnRegister" class="nav-link" runat="server" OnClick="btRegister_Click">Register</asp:LinkButton>
+                            </li>
+                            <%}
+                                else if (customer.CustomerRole.Equals("admin"))
+                                { %>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnTransactionAdmin" class="nav-link" runat="server" OnClick="btnTransactionAdmin_Click">Transaction</asp:LinkButton>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnProfileAdmin" class="nav-link" runat="server" OnClick="btUpdateC_Click">Update Profile</asp:LinkButton>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnLogoutAdmin" class="nav-link" runat="server" OnClick="btLogoutC_Click">Logout</asp:LinkButton>
+                            </li>
+                            <%}
+                                else
+                                { %>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnCartUser" class="nav-link" runat="server" OnClick="btCartC_Click">Cart</asp:LinkButton>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnTransactionUser" class="nav-link" runat="server" OnClick="btTransactionC_Click">Transaction</asp:LinkButton>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnUpdateProfileUser" class="nav-link" runat="server" OnClick="btUpdateC_Click">Update Profile</asp:LinkButton>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnLogoutUser" class="nav-link" runat="server" OnClick="btLogoutC_Click">Logout</asp:LinkButton>
+                            </li>
+                            <%} %>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
         </div>
     </form>
+
+    <!-- Required Library Bundle Script (Library Bootstrap) -->
+    <script src="../assets/js/core/libs.min.js"></script>
+
+    <!-- App Script (Library Bootstrap) -->
+    <script src="../assets/js/hope-ui.js" defer></script>
+
 </body>
 </html>
