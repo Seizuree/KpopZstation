@@ -14,25 +14,27 @@ namespace KpopZstation.Handler
         AlbumRepository AlbumRepo = new AlbumRepository();
         public Album uploadAlbum(int ArtistID, String AlbName, String AlbDesc, int AlbPrice, int AlbStock, FileUpload upImage)
         {
+            Guid uuid = Guid.NewGuid();
+            string filename = uuid.ToString() + System.IO.Path.GetExtension(upImage.PostedFile.FileName);
             string directoryPath = "Assets/Albums/";
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, upImage.FileName);
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, filename);
             upImage.SaveAs(filePath);
-            string AlbImage = "~/" + directoryPath + upImage.FileName;
 
-            return AlbumRepo.InsertAlbum(ArtistID, AlbName, AlbImage, AlbPrice, AlbStock, AlbDesc);
+            return AlbumRepo.InsertAlbum(ArtistID, AlbName, filename, AlbPrice, AlbStock, AlbDesc);
         }
 
         public Album updateAlbum(int AlbumID, String AlbName, String AlbDesc, int AlbPrice, int AlbStock, FileUpload upImage)
         {
+            Guid uuid = Guid.NewGuid();
+            string filename = uuid.ToString() + System.IO.Path.GetExtension(upImage.PostedFile.FileName);
             string directoryPath = "Assets/Albums/";
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, upImage.FileName);
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, filename);
             upImage.SaveAs(filePath);
-            string AlbImage = "~/" + directoryPath + upImage.FileName;
 
-            return AlbumRepo.UpdateAlbum(AlbumID, AlbName, AlbImage, AlbPrice, AlbStock, AlbDesc);
+            return AlbumRepo.UpdateAlbum(AlbumID, AlbName, filename, AlbPrice, AlbStock, AlbDesc);
         }
 
-        public Album deleteAlbum(String albumID)
+        public Album deleteAlbum(int albumID)
         {
             return AlbumRepo.DeleteAlbum(albumID);
         }
@@ -45,11 +47,6 @@ namespace KpopZstation.Handler
         public Album GetAlbumByAlbumID(int id)
         {
             return AlbumRepo.GetAlbumByID(id);
-        }
-
-        public Album GetAlbumByArtistIDAndAlbumID(int artistID, int albumID)
-        {
-            return AlbumRepo.GetAlbumByArtistIDAndAlbumID(artistID, albumID);
         }
     }
 }

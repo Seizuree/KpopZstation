@@ -11,9 +11,25 @@ namespace KpopZstation.View
 {
     public partial class UpdateArtist : System.Web.UI.Page
     {
+        Customer customer;
         ArtistController controller = new ArtistController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            customer = ((Customer)Session["customer"]);
+
+            if (customer == null)
+            {
+                Response.Redirect("~/View/Login.aspx");
+            }
+            if (!customer.CustomerRole.Equals("admin"))
+            {
+                Response.Redirect("~/View/Home.aspx");
+            }
+            if (Request.QueryString["art_id"] == null)
+            {
+                Response.Redirect("~/View/Home.aspx");
+            }
+
             if (!IsPostBack)
             {
                 int id = Convert.ToInt32(Request.QueryString["art_id"]);
@@ -22,12 +38,30 @@ namespace KpopZstation.View
             }
         }
 
+        public string ErrorMessage
+        {
+            get { return lblError.Text; }
+            set
+            {
+                lblError.Text = value;
+
+                // Show Error Alert
+                if (!string.IsNullOrEmpty(lblError.Text))
+                {
+                    alert.Style.Remove("display");
+                }
+                else
+                {
+                    alert.Style.Add("display", "none");
+                }
+            }
+        }
+
         protected void btnUpdateArtist_Click(object sender, EventArgs e)
         {
             int ArtistID = Convert.ToInt32(Request.QueryString["art_id"]);
-            lblError.Text = controller.UpdateArtist(ArtistID, tbArtName.Text, upImage);
-
-            if (lblError.Text == "Success")
+            
+            if (controller.UpdateArtist(this, ArtistID, tbArtName.Text, upImage))
             {
                 Response.Redirect("~/View/Home.aspx");
             }

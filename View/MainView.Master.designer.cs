@@ -33,112 +33,94 @@ namespace KpopZstation.View
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btHome control.
+        /// btnHome control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btHome;
+        protected global::System.Web.UI.WebControls.LinkButton btnHome;
 
         /// <summary>
-        /// btLogin control.
+        /// btnLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btLogin;
+        protected global::System.Web.UI.WebControls.LinkButton btnLogin;
 
         /// <summary>
-        /// btRegister control.
+        /// btnRegister control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btRegister;
+        protected global::System.Web.UI.WebControls.LinkButton btnRegister;
 
         /// <summary>
-        /// btHomeC control.
+        /// btnTransactionAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btHomeC;
+        protected global::System.Web.UI.WebControls.LinkButton btnTransactionAdmin;
 
         /// <summary>
-        /// btCartC control.
+        /// btnProfileAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btCartC;
+        protected global::System.Web.UI.WebControls.LinkButton btnProfileAdmin;
 
         /// <summary>
-        /// btTransactionC control.
+        /// btnLogoutAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btTransactionC;
+        protected global::System.Web.UI.WebControls.LinkButton btnLogoutAdmin;
 
         /// <summary>
-        /// btUpdateC control.
+        /// btnCartUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btUpdateC;
+        protected global::System.Web.UI.WebControls.LinkButton btnCartUser;
 
         /// <summary>
-        /// btLogoutC control.
+        /// btnTransactionUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btLogoutC;
+        protected global::System.Web.UI.WebControls.LinkButton btnTransactionUser;
 
         /// <summary>
-        /// btHomeA control.
+        /// btnUpdateProfileUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btHomeA;
+        protected global::System.Web.UI.WebControls.LinkButton btnUpdateProfileUser;
 
         /// <summary>
-        /// btTransactionA control.
+        /// btnLogoutUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btTransactionA;
-
-        /// <summary>
-        /// btUpdateA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btUpdateA;
-
-        /// <summary>
-        /// btLogoutA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btLogoutA;
+        protected global::System.Web.UI.WebControls.LinkButton btnLogoutUser;
 
         /// <summary>
         /// ContentPlaceHolder1 control.

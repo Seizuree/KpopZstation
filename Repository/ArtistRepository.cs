@@ -38,17 +38,23 @@ namespace KpopZstation.Repository
             return update;
         }
 
-        public Artist DeleteArtist(String artistID)
+        public Artist DeleteArtist(int artistID)
         {
-            Artist delete = db.Artists.Find(int.Parse(artistID));
-            db.Artists.Remove(delete);
+            Artist artistToDelete = db.Artists.Find(artistID);
+            artistToDelete.Albums.Clear();
+            db.Artists.Remove(artistToDelete);
             db.SaveChanges();
-            return delete;
+            return artistToDelete;
         }
 
         public Artist GetArtistByID(int id)
         {
             return (from ar in db.Artists where ar.ArtistID == id select ar).FirstOrDefault();
+        }
+
+        public Artist getArtistByName(string name)
+        {
+            return (from a in db.Artists where a.ArtistName.Equals(name) select a).FirstOrDefault();
         }
     }
 }

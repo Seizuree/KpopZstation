@@ -11,29 +11,51 @@ namespace KpopZstation.Handler
 {
     public class ArtistHandler
     {
-        ArtistRepository ArtistRepo = new ArtistRepository();
+        static ArtistRepository ArtistRepo = new ArtistRepository();
 
-        public Artist uploadArtist(String ArtName, FileUpload upImage)
+        public bool uploadArtist(String ArtName, FileUpload upImage)
         {
+            Guid uuid = Guid.NewGuid();
+            string filename = uuid.ToString() + System.IO.Path.GetExtension(upImage.PostedFile.FileName);
             string directoryPath = "Assets/Artists/";
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, upImage.FileName);
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, filename);
             upImage.SaveAs(filePath);
-            string ArtImage = "~/" + directoryPath + upImage.FileName;
 
-            return ArtistRepo.InsertArtist(ArtName, ArtImage);
+            if(ArtistRepo.InsertArtist(ArtName, filename) != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public Artist updateArtist(int ArtistID, String ArtName, FileUpload upImage)
+        public bool updateArtist(int ArtistID, String ArtName, FileUpload upImage)
         {
+            Guid uuid = Guid.NewGuid();
+            string filename = uuid.ToString() + System.IO.Path.GetExtension(upImage.PostedFile.FileName);
             string directoryPath = "Assets/Artists/";
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, upImage.FileName);
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryPath, filename);
             upImage.SaveAs(filePath);
-            string ArtImage = "~/" + directoryPath + upImage.FileName;
 
-            return ArtistRepo.UpdateArtist(ArtistID, ArtName, ArtImage);
+            if(ArtistRepo.UpdateArtist(ArtistID, ArtName, filename) != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public Artist deleteArtist(String artistID)
+        public bool isArtistNameUnique(string name)
+        {
+            if (ArtistRepo.getArtistByName(name) != null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public Artist deleteArtist(int artistID)
         {
             return ArtistRepo.DeleteArtist(artistID);
         }
